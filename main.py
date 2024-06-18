@@ -9,9 +9,6 @@ from inpute import input_genre
 from gigachat_gpt import get_promt_gigachat
 
 
-key = 'Api-key AQVNyCfgUCawzeHHwKA1pjY2G0nXC-_N-mlQEP1e'
-
-
 def get_city_location(city):
     api_key = 'ec4b6970-5c79-4ff8-a566-f8e1d899c61f'
     base_url = 'https://geocode-maps.yandex.ru/1.x/'

@@ -1,21 +1,17 @@
 import requests
 
-yandex_indf = 'b1gddig4d67h2ikc7i3q'
+YANDEX_INDF = 'b1gddig4d67h2ikc7i3q'
 
-yandex_indf_key = 'aje84vg509lgpngsfg50'
+# yandex_indf_key = 'aje84vg509lgpngsfg50'
 
-key = 'Api-key AQVNyCfgUCawzeHHwKA1pjY2G0nXC-_N-mlQEP1e'
+KEY = 'Api-key AQVNyCfgUCawzeHHwKA1pjY2G0nXC-_N-mlQEP1e'
 
-url_yandex = 'https://llm.api.cloud.yandex.net/foundationModels/v1/completion'
-
-key_giga='b2703af0-919d-4297-9466-2411639e96d5'
-
-author_data ='N2U3NDAxM2YtMDEwOC00N2I2LTkyMjQtNjg1ZTNkNjljYjdjOmIyNzAzYWYwLTkxOWQtNDI5Ny05NDY2LTI0MTE2MzllOTZkNQ=='
+URL = 'https://llm.api.cloud.yandex.net/foundationModels/v1/completion'
 
 
 def get_requests_yandex(meessage):
     prompt = {
-        "modelUri": f"gpt://{yandex_indf}/yandexgpt/latest",
+        "modelUri": f"gpt://{YANDEX_INDF}/yandexgpt/latest",
         "completionOptions": {
             "stream": False,
             "temperature": 0.6,
@@ -35,9 +31,9 @@ def get_requests_yandex(meessage):
 
     headers = {
             'Content-Type': 'application/json',
-            'Authorization': key
+            'Authorization': KEY
         }
 
-    response = requests.post(url=url_yandex, headers=headers, json=prompt)
+    response = requests.post(url=URL, headers=headers, json=prompt)
 
     return response
