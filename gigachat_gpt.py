@@ -3,12 +3,13 @@ import uuid
 import json
 import urllib3
 
-AUTH_TOKEN ='N2U3NDAxM2YtMDEwOC00N2I2LTkyMjQtNjg1ZTNkNjljYjdjOjRhNThkM2IzLTI3MzQtNDA1ZC1hNTFmLWU1ZDAxYTc4YzYyYw=='
+from settings import (AUTH_TOKEN_GIGACHAT, URL_TOKEN_GIGACHAT,
+                      URL_REQUESTS_GIGACHAT)
 
 
 def get_token(auth_token):
+    """Токен для авторизации в GigaChat."""
     rq_uid = str(uuid.uuid4())
-    url = 'https://ngw.devices.sberbank.ru:9443/api/v2/oauth'
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Accept': 'application/json',
@@ -19,16 +20,19 @@ def get_token(auth_token):
         'scope': 'GIGACHAT_API_PERS'
     }
     try:
-        response = requests.post(url, headers=headers, data=payload,
-                                 verify=False)
+        response = requests.post(url=URL_TOKEN_GIGACHAT,
+                                 headers=headers,
+                                 data=payload,
+                                 verify=False
+                                 )
         return response
     except requests.RequestException as error:
         return error
 
 
-def get_promt_gigachat(message):
-    giga_token = get_token(AUTH_TOKEN).json()['access_token']
-    url = "https://gigachat.devices.sberbank.ru/api/v1/chat/completions"
+def get_requests_gigachat(message):
+    """Запроса к GigaChatGPT."""
+    giga_token = get_token(AUTH_TOKEN_GIGACHAT).json()['access_token']
     payload = json.dumps({
         'model': 'GigaChat',
         'messages': [
@@ -54,7 +58,10 @@ def get_promt_gigachat(message):
             'Authorization': f'Bearer {giga_token}'
         }
     try:
-        response = requests.request('POST', url, headers=headers, data=payload,
+        response = requests.request('POST',
+                                    url=URL_REQUESTS_GIGACHAT,
+                                    headers=headers,
+                                    data=payload,
                                     verify=False)
         return response
     except requests.RequestException as error:
