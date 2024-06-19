@@ -7,20 +7,20 @@ from settings import KEY_API_YANDEX, URL_REQUESTS_YANDEX, YANDEX_INDF
 def get_requests_yandex(meessage):
     """Запрос к YandexGPT."""
     prompt = {
-        "modelUri": f"gpt://{YANDEX_INDF}/yandexgpt/latest",
-        "completionOptions": {
-            "stream": False,
-            "temperature": 0.6,
-            "maxTokens": "2000"
+        'modelUri': f'gpt://{YANDEX_INDF}/yandexgpt/latest',
+        'completionOptions': {
+            'stream': False,
+            'temperature': 0.6,
+            'maxTokens': '2000'
         },
-        "messages": [
+        'messages': [
             {
-                "role": "system",
-                "text": "Ты — писатель."
+                'role': 'system',
+                'text': 'Ты — писатель.'
             },
             {
-                "role": "user",
-                "text": meessage,
+                'role': 'user',
+                'text': meessage,
             }
         ]
     }

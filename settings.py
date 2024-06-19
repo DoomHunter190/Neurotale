@@ -6,7 +6,7 @@ load_dotenv()
 
 # Максимальное и минимальное кол-во символов.
 
-MIN_LENHGTH = 300
+MIN_LENHGTH = 100
 
 MAX_LENHGTH = 2000
 

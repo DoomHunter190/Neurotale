@@ -1,11 +1,11 @@
 import asyncio
 from datetime import datetime
 
-from gigachat_gpt import get_requests_gigachat
-from inpute_output import (input_city, input_genre, input_length, output,
-                           save_in_file)
-from other_api import get_weather
-from yandex_gpt import get_requests_yandex
+from service.gigachat_gpt import get_requests_gigachat
+from service.inpute_output import (input_city, input_genre, input_length,
+                                   output, save_in_file)
+from service.other_api import get_weather
+from service.yandex_gpt import get_requests_yandex
 
 
 def get_text_request(city, genre, length):
@@ -29,6 +29,7 @@ async def get_request_to_model(model_name, message):
 
 
 async def main():
+    print('Привет! Это Neurotale, давай напишем нейросказку!')
     city = input_city()
     genre = input_genre()
     length = input_length()
