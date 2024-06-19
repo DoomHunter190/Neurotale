@@ -1,6 +1,6 @@
 import re
 
-from settings import MIN_LENHGTH, MAX_LENHGTH
+from settings import MAX_LENHGTH, MIN_LENHGTH
 
 
 def input_genre():
@@ -17,7 +17,7 @@ def input_genre():
 
 def input_city():
     """Валидация строки город."""
-    pattern = '^[A-Za-zА-Яа-яЁё\s\-]+$'
+    pattern = '^[A-Za-zА-Яа-яЁё\s\-]+$' # noqa
     while True:
         city = input('Введите город: ')
         if re.match(pattern, city):
@@ -31,7 +31,8 @@ def input_length():
     while True:
         length = int(input('Введите длину рассказа в символах: '))
         if length < MIN_LENHGTH:
-            print(f'Получиться слишком короткий рассказ, введи больше {MIN_LENHGTH}')
+            print(f'Получиться слишком короткий рассказ, '
+                  f'введи больше {MIN_LENHGTH}')
         elif length > MAX_LENHGTH:
             print(f'Слишком много символов, введи меньше {MAX_LENHGTH}')
         else:
@@ -40,7 +41,9 @@ def input_length():
 
 def output(response):
     """Вывод в консоль."""
-    print(f'Ответ получен от: {response[2]}, длительность запроса: {response[1]}, файл: {response[2]}_response.txt')
+    print(f'Ответ получен от: {response[2]}, '
+          f'длительность запроса: {response[1]}, '
+          f'файл: {response[2]}_response.txt')
 
 
 def save_in_file(response):

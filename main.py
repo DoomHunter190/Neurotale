@@ -1,16 +1,19 @@
 import asyncio
 from datetime import datetime
 
+from gigachat_gpt import get_requests_gigachat
+from inpute_output import (input_city, input_genre, input_length, output,
+                           save_in_file)
 from other_api import get_weather
 from yandex_gpt import get_requests_yandex
-from inpute_output import input_genre, input_city, input_length, output, save_in_file
-from gigachat_gpt import get_requests_gigachat
 
 
 def get_text_request(city, genre, length):
     """Формирования сообщения запроса."""
     weather = get_weather(city)
-    return f'Напиши сказку в жанре {genre} о погоде в городе {city}. Прогноз на завтра: {weather}. Длина сказки - {length} символов.'
+    return (f'Напиши сказку в жанре {genre} о погоде в городе {city}. '
+            f'Прогноз на завтра: {weather}. '
+            f'Длина сказки не больше {length} символов.')
 
 
 async def get_request_to_model(model_name, message):

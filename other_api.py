@@ -1,7 +1,8 @@
 import requests
 
-from settings import (API_KEY_CITY, URL_REQUESTS_CITY,
-                      API_KEY_WEATHER, URL_REQUESTS_WEATHER)
+from http import HTTPStatus
+from settings import (API_KEY_CITY, API_KEY_WEATHER, URL_REQUESTS_CITY,
+                      URL_REQUESTS_WEATHER)
 
 
 def get_city_location(city):
@@ -11,20 +12,19 @@ def get_city_location(city):
         'apikey': API_KEY_CITY,
         'format': 'json',
     }
-
-    response = requests.get(URL_REQUESTS_CITY, params=params)
-
-    if response.status_code == 200:
-        try:
-            coords = (response.json()['response']['GeoObjectCollection']
-                      ['featureMember'][0]['GeoObject']['Point']['pos']
-                      )
-            longitude, latitude = map(float, coords.split())
-            return latitude, longitude
-        except (KeyError, IndexError, ValueError):
-            print('Город не найден или данные не доступны')
-    else:
+    try:
+        response = requests.get(URL_REQUESTS_CITY, params=params)
+    except Exception as error:
+        raise Exception(f'Ошибка при запросе к API геолокации {error}.')
+    if response.status_code != HTTPStatus.OK:
         print('Ошибка при получении координат')
+    else:
+        coords = (
+            response.json()['response']['GeoObjectCollection']
+            ['featureMember'][0]['GeoObject']['Point']['pos']
+                )
+        longitude, latitude = map(float, coords.split())
+        return latitude, longitude
 
 
 def get_weather(city):
@@ -38,8 +38,14 @@ def get_weather(city):
         'units': 'metric',
         'lang': 'ru',
     }
-    response = requests.get(URL_REQUESTS_WEATHER, params=params)
-    data = response.json()
-    temperature = data['list'][1]['main']['temp']
-    weather_description = data['list'][1]['weather'][0]['description']
-    return f'температура: {temperature}, {weather_description}'
+    try:
+        response = requests.get(URL_REQUESTS_WEATHER, params=params)
+    except Exception as error:
+        raise Exception(f'Ошибка при запросе к API погоды {error}.')
+    if response.status_code != HTTPStatus.OK:
+        print('Ошибка при получении погоды')
+    else:
+        data = response.json()
+        temperature = data['list'][1]['main']['temp']
+        weather_description = data['list'][1]['weather'][0]['description']
+        return f'температура: {temperature}, {weather_description}'

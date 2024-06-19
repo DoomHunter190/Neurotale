@@ -1,10 +1,11 @@
-import requests
-import uuid
 import json
+import uuid
+
+import requests
 import urllib3
 
-from settings import (AUTH_TOKEN_GIGACHAT, URL_TOKEN_GIGACHAT,
-                      URL_REQUESTS_GIGACHAT)
+from settings import (AUTH_TOKEN_GIGACHAT, URL_REQUESTS_GIGACHAT,
+                      URL_TOKEN_GIGACHAT)
 
 
 def get_token(auth_token):

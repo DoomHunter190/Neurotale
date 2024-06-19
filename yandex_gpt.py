@@ -1,6 +1,7 @@
 import requests
+from http import HTTPStatus
 
-from settings import YANDEX_INDF, KEY_API_YANDEX, URL_REQUESTS_YANDEX
+from settings import KEY_API_YANDEX, URL_REQUESTS_YANDEX, YANDEX_INDF
 
 
 def get_requests_yandex(meessage):
@@ -28,9 +29,14 @@ def get_requests_yandex(meessage):
             'Content-Type': 'application/json',
             'Authorization': KEY_API_YANDEX
         }
-
-    response = requests.post(url=URL_REQUESTS_YANDEX,
-                             headers=headers,
-                             json=prompt)
-
-    return response
+    try:
+        response = requests.post(url=URL_REQUESTS_YANDEX,
+                                 headers=headers,
+                                 json=prompt
+                                 )
+    except Exception as error:
+        raise Exception(f'Ошибка при запросе к YandexGPT {error}.')
+    if response.status_code != HTTPStatus.OK:
+        print('Ошибка при получении ответа от YandexGPT')
+    else:
+        return response
