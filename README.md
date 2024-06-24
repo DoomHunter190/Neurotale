@@ -32,19 +32,6 @@ Neurotale - мини-приложение для написания нейрос
     YANDEX_INDF= 'Индификатор каталога'https://yandex.cloud/ru/services/yandexgpt
     ```
 
-   P.S Для проверки тестового задания:
-    ```
-    AUTH_TOKEN_GIGACHAT='N2U3NDAxM2YtMDEwOC00N2I2LTkyMjQtNjg1ZTNkNjljYjdjOjRhNThkM2IzLTI3MzQtNDA1ZC1hNTFmLWU1ZDAxYTc4YzYyYw=='
-    
-    API_KEY_CITY='ec4b6970-5c79-4ff8-a566-f8e1d899c61f'
-    
-    API_KEY_WEATHER='46f1cbbca65cad26389133ee943cd628'
-    
-    KEY_API_YANDEX='Api-key AQVNyCfgUCawzeHHwKA1pjY2G0nXC-_N-mlQEP1e'
-    
-    YANDEX_INDF='b1gddig4d67h2ikc7i3q'
-    ```
-
 
 ### Запуск
 Запустить файл main.py:
